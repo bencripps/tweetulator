@@ -28,7 +28,9 @@ module.exports = function( app ) {
 
 			var sortedWords = allWords.sort();
 
-			console.log(sortedWords)
+			var uniqueWords = underscore.uniq(sortedWords, true)
+
+			getWordCount( uniqueWords, sortedWords)
 
 
 			res.send({'success': true})
@@ -55,6 +57,26 @@ module.exports = function( app ) {
 			return allWords;
 
 		}
-	})
+
+		var getWordCount = function(uniqueWords, sortedWords) {
+
+			var finalTally = {};
+
+			console.log(uniqueWords.length)
+			console.log(sortedWords.length)
+
+			for (var i=0; i <= uniqueWords.length-1; i++) {
+
+				finalTally[uniqueWords[i]] = 0;
+			}
+
+			for (var x = 0; x <= sortedWords.length-1; x++) {
+
+				finalTally[sortedWords[x]] += 1
+			}
+
+			console.log(finalTally)
+		}
+ 	})
 
 }
