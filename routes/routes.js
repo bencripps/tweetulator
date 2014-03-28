@@ -30,13 +30,19 @@ module.exports = function( app ) {
 
 			var uniqueWords = underscore.uniq(sortedWords, true)
 
-			getWordCount( uniqueWords, sortedWords)
+			var wordList = getWordCount( uniqueWords, sortedWords);
+
+			var count = {'totalWords': sortedWords.length, 'uniqueWords': uniqueWords.length}
 
 
-			res.send({'success': true})
+			res.send({'success': true, 'wordList': wordList, 'totals': count})
 		})
 		
 		var getAllWords = function(tweets) {
+
+			//function removes words with: 
+			//@, # and :
+			//then removes any non-alphanumeric chars with regex
 
 			var allWords = [];
 
@@ -48,7 +54,10 @@ module.exports = function( app ) {
 
 					var thisWord = currentwords[x]
 
-					if ( !underscore.contains(thisWord, '@') && !underscore.contains(thisWord, '#') && !underscore.contains(thisWord, ':') && thisWord.length != 1 ) {
+					if ( !underscore.contains(thisWord, '@') && !underscore.contains(thisWord, '#') && !underscore.contains(thisWord, ':') && thisWord.length != 1  && !/\d/.test(thisWord) ) {
+							
+							thisWord = thisWord.replace(/[^\w\s]|_/g, "");
+
 							allWords.push(thisWord.toLowerCase() )
 						}
 				}
@@ -62,9 +71,6 @@ module.exports = function( app ) {
 
 			var finalTally = {};
 
-			console.log(uniqueWords.length)
-			console.log(sortedWords.length)
-
 			for (var i=0; i <= uniqueWords.length-1; i++) {
 
 				finalTally[uniqueWords[i]] = 0;
@@ -74,8 +80,8 @@ module.exports = function( app ) {
 
 				finalTally[sortedWords[x]] += 1
 			}
-
-			console.log(finalTally)
+			
+			return finalTally;
 		}
  	})
 

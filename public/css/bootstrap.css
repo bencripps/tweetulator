@@ -5,24 +5,20 @@
  */
 
 /*Custom*/
-.headerColor {
-  background-color: #95B9C7
+.chartHolder {
+  margin-top: 300px;
+  width: 75%;
+  margin: 0px auto;
 }
-
-.formcontainer {
-  width: 60%;
+.chart {
+  margin-top: 5px;
+  width: 100%;
   margin: 0px auto;
 }
 
-.buffer {
-  margin-top: 2em;
-  margin-bottom: 2em;
-}
-
-.footer, a, a:active {
-  font-family: 'avenir';
-  color: black;
-  padding-top: 3em;
+.chart rect {
+  stroke: white;
+  fill: steelblue;
 }
 
 /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
