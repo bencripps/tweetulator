@@ -22,20 +22,44 @@ module.exports = function( app ) {
 
 		Twitter.get('statuses/user_timeline', { screen_name: userName, count: 2000 },  function (err, reply) {
 			
-			var totalTweets = reply.length;
+			
+			if (!err) {
+				var totalTweets = reply.length;
 
-			var allWords = getAllWords(reply);
+				var bgImg = reply[0].user.profile_image_url;
 
-			var sortedWords = allWords.sort();
+				var today = Date.parse(new Date());
 
-			var uniqueWords = underscore.uniq(sortedWords, true)
+				var timePeriodBetweenLastTweet = today - Date.parse(reply[totalTweets-1].created_at);
 
-			var wordList = getWordCount( uniqueWords, sortedWords);
+				var avgTweets = (timePeriodBetweenLastTweet / (1000*60*60*24) ) / totalTweets 
 
-			var count = {'totalWords': sortedWords.length, 'uniqueWords': uniqueWords.length}
+				var allWords = getAllWords(reply);
+
+				var sortedWords = allWords.sort();
+
+				var uniqueWords = underscore.uniq(sortedWords, true)
+
+				var wordList = getWordCount( uniqueWords, sortedWords);
+
+				var count = {'totalWords': sortedWords.length, 'uniqueWords': uniqueWords.length}
 
 
-			res.send({'success': true, 'wordList': wordList, 'totals': count})
+				res.send({'success': true, 'wordList': wordList, 'totals': count, 
+					'generalInfo': { 
+						'screenname': userName,
+						'totalTweets': totalTweets,
+						'allWords': allWords.length,
+						'TweetsPerDay': avgTweets.toFixed(3),
+						'bgImg': bgImg
+					}
+				})
+
+			}
+
+			else {
+				res.send({'success': false})
+			}
 		})
 		
 		var getAllWords = function(tweets) {
@@ -54,9 +78,9 @@ module.exports = function( app ) {
 
 					var thisWord = currentwords[x]
 
-					if ( !underscore.contains(thisWord, '@') && !underscore.contains(thisWord, '#') && !underscore.contains(thisWord, ':') && thisWord.length != 1  && !/\d/.test(thisWord) ) {
+					if ( !/\W/.test(thisWord) && thisWord.length > 2  && !/\d/.test(thisWord) ) {
 							
-							thisWord = thisWord.replace(/[^\w\s]|_/g, "");
+							//thisWord = thisWord.replace(/[^\w\s]|_/g, "");
 
 							allWords.push(thisWord.toLowerCase() )
 						}

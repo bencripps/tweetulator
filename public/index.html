@@ -3,10 +3,10 @@
 <head>
 	
 	<meta charset='UTF-8' lang='en'>
-	<title>TwitterStats</title>
+	<title>Tweetulator</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script type="text/javascript" src='//cdnjs.cloudflare.com/ajax/libs/d3/3.4.4/d3.min.js'></script>
+	<script type="text/javascript" src='//d3js.org/d3.v3.js'></script>
 	<script type="text/javascript" src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js'></script>
 	<script type="text/javascript" src='twitter.js'></script>
 
@@ -15,24 +15,100 @@
 	
 <body>
 
-	<div class="navbar-form navbar-left" role="search">
-  		
-  		<a class="navbar-brand" href="#">TwitterStats</a>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Tweetulator</a>
+    </div>
 
-  		<div class="form-group">
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" id='username' placeholder="twitter username...">
+        </div>
+        <button type="submit" id='submit' class="btn btn-success">Submit</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="//benjamincripps.com">Homepage</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div class='page-header container mainheader'>About Tweetulator</div>
 
-    		<input type="text" class="form-control" id='username' placeholder="twitter username..">
+<div class='container'>
 
-  		</div>
-  	
-  		<button type="submit" class="btn btn-default" id='submit'>Submit</button>
+	<h4>Ever wondered about how you use social media? What type of language you use, how often you post, and what you post about? Tweetulator is a simple service that takes all of your tweets, and breaks it down for you. Enter a username and check out the twitter footprint.</h4>
+</div>
+
+<div class='container progbar'>
+      <div class="progress progress-striped active bar">
+      <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 56%;">
+      56%
+      </div>
+</div>
+
+<div class='show'>
+
+	<div class='page-header container mainheader'>General Info</div>
+
+	<div class='container col-sm-2 col-sm-offset-1 text-center'>
+		<img id='twitterImg' src=''>
+	</div>	
+
+	<div class='container col-sm-4 col-sm-offset-3'>
+
+		<div class="row spacer">
+			<label id='username'>User Name:</label>
+		</div>
+
+		<div class="row spacer">
+			<label id='totalTweets'>Number of Tweets Analyzed:</label>
+		</div>	
+
+		<div class="row spacer">
+			<label id='totalWords'>Total Number of Words Processed:</lable>
+		</div>
+
+		<div class="row spacer">
+			<label id='TweetsPerDay'>Average Number of Tweets per day</label>
+		</div>
 
 	</div>
 
+	<div class='page-header container lowerheader'>
 
-<div class='chartHolder'>
-	<div class'chartheader'>HELLO</div>
-	<div class='chart'></div>
+		Most Commly Used Words
+
+	</div>
+
+	<div class='container textBox text-center'></div>
+
+	<div class='page-header container mainheader'>Graph</div>
+
+	<div class='chartHolder'>
+
+		<div class'chartheader'></div>
+
+		<div class='chart'></div>
+
+	</div>
+
 </div>
+</div>
+<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+ 	<div class='footer'>
+ 	Tweetulator | benjamincripps.com
+ 	</div>
+</nav>
+
 </body>
 </html>

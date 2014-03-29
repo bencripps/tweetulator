@@ -5,8 +5,11 @@
  */
 
 /*Custom*/
+
+.spacer {
+  margin: 20px;
+}
 .chartHolder {
-  margin-top: 300px;
   width: 75%;
   margin: 0px auto;
 }
@@ -21,6 +24,40 @@
   fill: steelblue;
 }
 
+#twitterImg {
+  width: 150px;
+  height: 150px;
+}
+
+.mainheader {
+  padding-top: 30px;
+}
+
+.lowerheader {
+  padding-top: 260px;
+}
+
+.word {
+  display: inline-block;
+  margin: 1px;
+}
+
+.show {
+  visibility: hidden;
+}
+
+.progbar {
+  visibility: hidden;
+}
+
+.bar {
+  width: 50%
+}
+
+.footer {
+  padding-top:13px;
+  text-align: center
+}
 /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;

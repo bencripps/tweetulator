@@ -18,31 +18,56 @@ var twitterClient = (function() {
 			e.preventDefault();
 
 			var userName = $('#username').val();
+			$('.progbar').css('visibility', 'visible');
 
 			$.post('/username', {'username': userName }, function(data) {
 
-				displayData(data)
+				$('.show').css('visibility', 'visible');
+				$('.progbar').css('visibility', 'hidden');
+
+				displayGraph(data)
+				showGeneralInfo(data)
 			})
 		})
 	};
 
+	var showGeneralInfo = function(data) {
 
-	var displayData = function(data) {
+		var userObject = data.generalInfo;
+		console.log(userObject)
+
+		$('label#username').html('User Name: ' + userObject.screenname);
+		$('label#totalTweets').html('Number of Tweets Analyzed: ' + userObject.totalTweets);
+		$('label#totalWords').html('Total Number of Words Processed: ' + userObject.allWords);
+		$('label#TweetsPerDay').html('Average Number of Tweets per day: ' + userObject.TweetsPerDay);
+		$('#twitterImg').attr('src', userObject.bgImg);
+	}
+
+	var displayGraph = function(data) {
 
 		var totals = data.totals.totalWords;
 		var unique = data.totals.uniqueWords;
 
 		var justNumbers = [];
 		var justNames = [];
+		var indexNumber =[];
+		var textBox = $('.textBox');
+		var htmlInsert; 
+		var index = 0;
 
 		_.each(data.wordList, function(val, key) {
 
 			if (val > 1 && key.length > 1) {
+				indexNumber.push(index)
 				justNumbers.push(val)
 				justNames.push(key)
+
+				htmlInsert += '<div class="word"><font size="' + val +'">'  + key + '</div>';
+				index++;
 			}
 		});
 
+		textBox.append(htmlInsert)
 		console.log(justNumbers)
 
 	    var chart,
