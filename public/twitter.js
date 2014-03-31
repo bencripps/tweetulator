@@ -25,7 +25,8 @@ var twitterClient = (function() {
 				$('.show').css('visibility', 'visible');
 				$('.progbar').css('visibility', 'hidden');
 
-				displayGraph(data)
+				displayCommonWords(data)
+				displayDatesGraph(data.wordTotals)
 				showGeneralInfo(data)
 			})
 		})
@@ -43,7 +44,7 @@ var twitterClient = (function() {
 		$('#twitterImg').attr('src', userObject.bgImg);
 	}
 
-	var displayGraph = function(data) {
+	var displayCommonWords = function(data) {
 
 		var totals = data.totals.totalWords;
 		var unique = data.totals.uniqueWords;
@@ -67,47 +68,27 @@ var twitterClient = (function() {
 			}
 		});
 
-		textBox.append(htmlInsert)
-		console.log(justNumbers)
+		textBox.html(htmlInsert)
 
-	    var chart,
-		    width = 700,
-		    bar_height = 2,
-		    height = bar_height * justNames.length;
+		}
 
-		chart = d3.select(".chart") 
-		  .append('svg')
-		  .attr('class', 'chart')
-		  .attr('width', width)
-		  .attr('height', height);
+		var displayDatesGraph = function(data) {
+			
+			console.log(data)
+				
+			var canvas = d3.select('.chart')
+							.append('svg')
+							.attr('width', 2900)
+							.attr('height', data.length * 5)
 
-		var x, y;
-		x = d3.scale.linear()
-		   .domain([0, d3.max(justNumbers)])
-		   .range([0, width]);
-
-		y = d3.scale.ordinal()
-		   .domain(justNumbers)
-		   .rangeBands([0, height]);
-
-		chart.selectAll("rect")
-		   .data(justNumbers)
-		   .enter().append("rect")
-		   .attr("x", 0)
-		   .attr("y", y)
-		   .attr("width", x)
-		   .attr("height", y.rangeBand()); 
-
-		chart.selectAll("text")
-		  .data(justNumbers)
-		  .enter().append("text")
-		  .attr("x", x)
-		  .attr("y", function(d){ return y(d) + y.rangeBand()/2; } )
-		  .attr("dx", -5)
-		  .attr("dy", ".36em")
-		  .attr("text-anchor", "end")
-		  .text(String);
-
+			var bars = canvas.selectAll('rect')
+							.data(data)
+							.enter()
+								.append('rect')
+								.attr('width', function(d){ return d; })
+								.attr('height', 5)
+								.attr('y', function(d, i) { return i * 5; })
+								
 		}
 	
 	return {

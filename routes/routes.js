@@ -28,6 +28,8 @@ module.exports = function( app ) {
 
 				var bgImg = reply[0].user.profile_image_url;
 
+				var wordTotals = getWordTotals(reply)
+
 				var today = Date.parse(new Date());
 
 				var timePeriodBetweenLastTweet = today - Date.parse(reply[totalTweets-1].created_at);
@@ -35,6 +37,8 @@ module.exports = function( app ) {
 				var avgTweets = (timePeriodBetweenLastTweet / (1000*60*60*24) ) / totalTweets 
 
 				var allWords = getAllWords(reply);
+
+				var sum = underscore.reduce(wordTotals, function(memo, num){ return memo + num; }, 0);
 
 				var sortedWords = allWords.sort();
 
@@ -45,11 +49,14 @@ module.exports = function( app ) {
 				var count = {'totalWords': sortedWords.length, 'uniqueWords': uniqueWords.length}
 
 
-				res.send({'success': true, 'wordList': wordList, 'totals': count, 
+				res.send({'success': true, 
+					'wordList': wordList, 
+					'totals': count,
+					'wordTotals': wordTotals, 
 					'generalInfo': { 
 						'screenname': userName,
 						'totalTweets': totalTweets,
-						'allWords': allWords.length,
+						'allWords': sum,
 						'TweetsPerDay': avgTweets.toFixed(3),
 						'bgImg': bgImg
 					}
@@ -106,6 +113,18 @@ module.exports = function( app ) {
 			}
 			
 			return finalTally;
+		}
+
+		var getWordTotals = function(data) {
+
+			var countArrary = [];
+
+			for (var i=0; i <= data.length - 1; i ++ ) {
+
+				countArrary.push( data[i].text.length );
+			}
+
+			return countArrary;
 		}
  	})
 
