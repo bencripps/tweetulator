@@ -6,6 +6,10 @@
 
 /*Custom*/
 
+label {
+  text-indent: 15px
+}
+
 .spacer {
   margin: 20px;
 }
@@ -24,9 +28,14 @@
   fill: steelblue;
 }
 
+#error {
+  visibility: hidden;
+}
+
 #twitterImg {
   width: 150px;
   height: 150px;
+  padding-top: 40px;
 }
 
 .mainheader {
@@ -34,7 +43,7 @@
 }
 
 .lowerheader {
-  padding-top: 220px;
+  padding-top: 340px;
 }
 
 .word {

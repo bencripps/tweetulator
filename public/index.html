@@ -36,6 +36,9 @@
         </div>
         <button type="submit" id='submit' class="btn btn-success">Submit</button>
       </form>
+      <ul class="nav navbar-nav">
+        <li class="navbar-brand" id='error'><font color='red'>No Username Found!</font></li>
+      </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="//benjamincripps.com">Homepage</a></li>
       </ul>
@@ -67,19 +70,38 @@
 	<div class='container col-sm-4 col-sm-offset-3'>
 
 		<div class="row spacer">
-			<label id='username'>User Name:</label>
+			<div class-'page-header'>
+				Username:
+			</div>
+			<label id='username'></label>
 		</div>
 
 		<div class="row spacer">
-			<label id='totalTweets'>Number of Tweets Analyzed:</label>
+			<div class-'page-header'>
+				Number of Tweets Analyzed:
+			</div>
+			<label id='totalTweets'></label>
 		</div>	
 
 		<div class="row spacer">
-			<label id='totalWords'>Total Number of Words Processed:</lable>
+			<div class-'page-header'>
+				Total Number of Words Processed:
+			</div>
+			<label id='totalWords'></lable>
 		</div>
 
 		<div class="row spacer">
-			<label id='TweetsPerDay'>Average Number of Tweets per day</label>
+			<div class-'page-header'>
+				Average Number of Tweets per day
+			</div>
+			<label id='TweetsPerDay'></label>
+		</div>
+
+		<div class="row spacer">
+			<div class-'page-header'>
+				Average Number of Words per Tweet
+			</div>
+			<label id='avgWordCount'></label>
 		</div>
 
 	</div>

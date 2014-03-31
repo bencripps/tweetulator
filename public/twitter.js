@@ -20,15 +20,32 @@ var twitterClient = (function() {
 			var userName = $('#username').val();
 			$('.progbar').css('visibility', 'visible');
 
-			$.post('/username', {'username': userName }, function(data) {
+			$.post('/username', {'username': userName })
 
-				$('.show').css('visibility', 'visible');
-				$('.progbar').css('visibility', 'hidden');
+			.success( function(data) {
+				var error = $('#error')
+					progBar = $('.progbar'),
+					show = $('.show')
 
-				displayCommonWords(data)
-				displayDatesGraph(data.wordTotals)
-				showGeneralInfo(data)
+				if (data.totals) {
+
+					show.css('visibility', 'visible');
+					progBar.css('visibility', 'hidden');
+					error.css('visibility', 'hidden');
+
+					displayCommonWords(data)
+					displayDatesGraph(data.wordTotals)
+					showGeneralInfo(data)
+					
+				}
+
+				else {
+					error.css('visibility', 'visible');
+					progBar.css('visibility', 'hidden');
+					show.css('visibility', 'hidden');
+				}
 			})
+
 		})
 	};
 
@@ -37,11 +54,12 @@ var twitterClient = (function() {
 		var userObject = data.generalInfo;
 		console.log(userObject)
 
-		$('label#username').html('User Name: ' + userObject.screenname);
-		$('label#totalTweets').html('Number of Tweets Analyzed: ' + userObject.totalTweets);
-		$('label#totalWords').html('Total Number of Words Processed: ' + userObject.allWords);
-		$('label#TweetsPerDay').html('Average Number of Tweets per day: ' + userObject.TweetsPerDay);
+		$('label#username').html(userObject.screenname);
+		$('label#totalTweets').html(userObject.totalTweets);
+		$('label#totalWords').html(userObject.allWords);
+		$('label#TweetsPerDay').html(userObject.TweetsPerDay);
 		$('#twitterImg').attr('src', userObject.bgImg);
+		$('#avgWordCount').html(userObject.avgWordCount);
 	}
 
 	var displayCommonWords = function(data) {
@@ -75,11 +93,13 @@ var twitterClient = (function() {
 		var displayDatesGraph = function(data) {
 			
 			console.log(data)
+
+			$('.chart').empty();
 				
 			var canvas = d3.select('.chart')
 							.append('svg')
 							.attr('width', 2900)
-							.attr('height', data.length * 5)
+							.attr('height', data.length * 5.2)
 
 			var bars = canvas.selectAll('rect')
 							.data(data)

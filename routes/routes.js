@@ -24,29 +24,19 @@ module.exports = function( app ) {
 			
 			
 			if (!err) {
-				var totalTweets = reply.length;
 
-				var bgImg = reply[0].user.profile_image_url;
-
-				var wordTotals = getWordTotals(reply)
-
-				var today = Date.parse(new Date());
-
-				var timePeriodBetweenLastTweet = today - Date.parse(reply[totalTweets-1].created_at);
-
-				var avgTweets = (timePeriodBetweenLastTweet / (1000*60*60*24) ) / totalTweets 
-
-				var allWords = getAllWords(reply);
-
-				var sum = underscore.reduce(wordTotals, function(memo, num){ return memo + num; }, 0);
-
-				var sortedWords = allWords.sort();
-
-				var uniqueWords = underscore.uniq(sortedWords, true)
-
-				var wordList = getWordCount( uniqueWords, sortedWords);
-
-				var count = {'totalWords': sortedWords.length, 'uniqueWords': uniqueWords.length}
+				var totalTweets = reply.length,
+					bgImg = reply[0].user.profile_image_url,
+					wordTotals = getWordTotals(reply),
+					today = Date.parse(new Date()),
+					timePeriodBetweenLastTweet = today - Date.parse(reply[totalTweets-1].created_at),
+					avgTweets = (timePeriodBetweenLastTweet / (1000*60*60*24) ) / totalTweets,
+					allWords = getAllWords(reply),
+					sum = underscore.reduce(wordTotals, function(memo, num){ return memo + num; }, 0),
+					sortedWords = allWords.sort(),
+					uniqueWords = underscore.uniq(sortedWords, true),
+					wordList = getWordCount( uniqueWords, sortedWords),
+					count = {'totalWords': sortedWords.length, 'uniqueWords': uniqueWords.length}
 
 
 				res.send({'success': true, 
@@ -58,7 +48,8 @@ module.exports = function( app ) {
 						'totalTweets': totalTweets,
 						'allWords': sum,
 						'TweetsPerDay': avgTweets.toFixed(3),
-						'bgImg': bgImg
+						'bgImg': bgImg,
+						'avgWordCount': (sum / reply.length).toFixed(3)
 					}
 				})
 
