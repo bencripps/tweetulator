@@ -2,10 +2,10 @@ var twitter = require('twit');
 var underscore = require('underscore')
 
 var Twitter = new twitter({
-	consumer_key: 'sISe5FQF93i5OJS9PtgQww',
-	consumer_secret: 'h8X1Lw6122f6GcHVGRS8RN0FAjROwfiJY4r7z0Azs',
-	access_token: '55620549-TpzCSU5Xu1YivaKwFeiVxMeG6M2MY7DaCuOUe4lrF',
-	access_token_secret: 'oHqXloMcYRUwkxHR4rvW3rVA8RNRrGQJBdRPUU59qVqeW'
+	consumer_key: process.env.consumer_key,
+	consumer_secret: process.env.consumer_secret,
+	access_token: process.env.access_token,
+	access_token_secret: process.env.access_token_secret
 });	
 
 
@@ -32,7 +32,7 @@ module.exports = function( app ) {
 					timePeriodBetweenLastTweet = today - Date.parse(reply[totalTweets-1].created_at),
 					avgTweets = (timePeriodBetweenLastTweet / (1000*60*60*24) ) / totalTweets,
 					allWords = getAllWords(reply),
-					sum = underscore.reduce(wordTotals, function(memo, num){ return memo + num; }, 0),
+					sum = underscore.reduce(wordTotals.totalWordCount, function(memo, num){ return memo + num; }, 0),
 					sortedWords = allWords.sort(),
 					uniqueWords = underscore.uniq(sortedWords, true),
 					wordList = getWordCount( uniqueWords, sortedWords),
@@ -108,14 +108,16 @@ module.exports = function( app ) {
 
 		var getWordTotals = function(data) {
 
-			var countArrary = [];
+			var textArrary = [];
+			var counterArray = [];
 
 			for (var i=0; i <= data.length - 1; i ++ ) {
 
-				countArrary.push( data[i].text.length );
+				textArrary.push( { 'text': data[i].text, 'length': data[i].text.length } );
+				counterArray.push( data[i].text.length)
 			}
 
-			return countArrary;
+			return {'textArray': textArrary, 'totalWordCount': counterArray };
 		}
  	})
 

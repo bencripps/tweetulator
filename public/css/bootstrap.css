@@ -33,13 +33,15 @@ label {
 }
 
 #twitterImg {
-  width: 150px;
-  height: 150px;
-  padding-top: 40px;
+  width: 170px;
+  height: 170px;
+  margin-top: 40px;
+  border: 20px solid steelblue;
+
 }
 
 .mainheader {
-  padding-top: 30px;
+  padding-top: 20px;
 }
 
 .lowerheader {
@@ -55,6 +57,10 @@ label {
   visibility: hidden;
 }
 
+.head {
+  border-bottom: 1px dotted black;
+}
+
 .progbar {
   visibility: hidden;
 }
@@ -67,6 +73,21 @@ label {
   padding-top:13px;
   text-align: center
 }
+
+/*tool tip css*/
+
+div.tooltip {   
+  position: absolute;           
+  text-align: center;           
+  width: 260px;                                 
+  padding: 2px;             
+  font: 12px sans-serif;        
+  background: lightsteelblue;   
+  border: 0px;      
+  border-radius: 8px;           
+  pointer-events: none;         
+}
+
 /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;

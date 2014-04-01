@@ -5,10 +5,10 @@
 	<meta charset='UTF-8' lang='en'>
 	<title>tweetulator</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script type="text/javascript" src='//d3js.org/d3.v3.js'></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+	<script type="text/javascript" src='//cdnjs.cloudflare.com/ajax/libs/d3/3.4.4/d3.min.js'></script>
 	<script type="text/javascript" src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js'></script>
-	<script type="text/javascript" src='twitter.js'></script>
+	<script type="text/javascript" src='javascript/twitter.js'></script>
 
 
 </head>
@@ -17,7 +17,6 @@
 
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
@@ -40,7 +39,7 @@
         <li class="navbar-brand" id='error'><font color='red'>No Username Found!</font></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="//benjamincripps.com">Homepage</a></li>
+        <li><a href="//benjamincripps.com/#about">About</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -70,36 +69,36 @@
 	<div class='container col-sm-4 col-sm-offset-3'>
 
 		<div class="row spacer">
-			<div class-'page-header'>
+			<div class='head'>
 				Username:
 			</div>
 			<label id='username'></label>
 		</div>
 
 		<div class="row spacer">
-			<div class-'page-header'>
+			<div class='head'>
 				Number of Tweets Analyzed:
 			</div>
 			<label id='totalTweets'></label>
 		</div>	
 
 		<div class="row spacer">
-			<div class-'page-header'>
+			<div class='head'>
 				Total Number of Words Processed:
 			</div>
 			<label id='totalWords'></lable>
 		</div>
 
 		<div class="row spacer">
-			<div class-'page-header'>
+			<div class='head'>
 				Average Number of Tweets per day
 			</div>
 			<label id='TweetsPerDay'></label>
 		</div>
 
 		<div class="row spacer">
-			<div class-'page-header'>
-				Average Number of Words per Tweet
+			<div class='head'>
+				Average Number of Characters per Tweet
 			</div>
 			<label id='avgWordCount'></label>
 		</div>
@@ -114,7 +113,7 @@
 
 	<div class='container textBox text-center'></div>
 
-	<div class='page-header container mainheader'>Word Count per Tweet</div>
+	<div class='page-header container mainheader'>Character Count per Tweet</div>
 
 	<div class='chartHolder'>
 
