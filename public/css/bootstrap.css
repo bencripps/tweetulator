@@ -40,6 +40,10 @@ label {
 
 }
 
+.mostPopular {
+  color: red;
+}
+
 .mainheader {
   padding-top: 20px;
 }

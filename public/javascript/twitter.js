@@ -65,17 +65,23 @@ var twitterClient = (function() {
 	var displayCommonWords = function(data) {
 
 		var textBox = $('.textBox');
+		var totals = [];
 		var htmlInsert = ""; 
 
 		_.each(data.wordList, function(val, key) {
 
 			if (val > 1 && key.length > 1) {
 
-				htmlInsert += '<div class="word"><font size="' + (val + 2) + '">'  + key + '</div>';
+				htmlInsert += '<div class="word" id="popularity'+ val +'"><font size="' + (val + 2) + '">'  + key + '</div>';
+				totals.push(val)
 			}
 		});
 
+		var mostPopularValue = _.max(totals)
+
 		textBox.html(htmlInsert)
+
+		$('#popularity' + mostPopularValue).addClass('mostPopular')
 
 		}
 

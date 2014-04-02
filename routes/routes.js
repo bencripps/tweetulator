@@ -74,16 +74,16 @@ module.exports = function( app ) {
 
 				for (var x=0; x <= currentwords.length-1; x++) {
 
-					var thisWord = currentwords[x]
+					var thisWord = currentwords[x].toLowerCase()
 
 					if ( !/\W/.test(thisWord) && thisWord.length > 2  && !/\d/.test(thisWord) ) {
 							
-							var ignoredWords = ['are', 'about', 'and', 'but', 'for', 'have', 'how', 'just',
-							'like', 'not', 'that', 'the', 'their', 'there', 'this', 'was', 'who',
-							'what', 'where', 'were', 'with', 'you', 'your'];
+							var ignoredWords = ['are', 'about', 'and', 'but', 'for', 'from', 'has', 
+							'have', 'how', 'just', 'like', 'not', 'that', 'the', 'their', 'there', 
+							'this', 'was', 'who', 'what', 'where', 'were', 'with', 'you', 'your'];
 
 							if (ignoredWords.indexOf(thisWord) === -1) {
-								allWords.push(thisWord.toLowerCase() )	
+								allWords.push( thisWord )	
 							}
 
 						}
