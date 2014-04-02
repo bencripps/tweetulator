@@ -65,13 +65,13 @@ var twitterClient = (function() {
 	var displayCommonWords = function(data) {
 
 		var textBox = $('.textBox');
-		var htmlInsert; 
+		var htmlInsert = ""; 
 
 		_.each(data.wordList, function(val, key) {
 
 			if (val > 1 && key.length > 1) {
 
-				htmlInsert += '<div class="word"><font size="' + val +'">'  + key + '</div>';
+				htmlInsert += '<div class="word"><font size="' + (val + 2) + '">'  + key + '</div>';
 			}
 		});
 
@@ -86,7 +86,7 @@ var twitterClient = (function() {
 			var canvas = d3.select('.chart')
 							.append('svg')
 							.attr('width', 1000)
-							.attr('height', data.length * 5.2)			
+							.attr('height', data.length * 6)			
 
 			var div = d3.select(".chart").append("div")   
 					    .attr("class", "tooltip")               

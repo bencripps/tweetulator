@@ -78,9 +78,14 @@ module.exports = function( app ) {
 
 					if ( !/\W/.test(thisWord) && thisWord.length > 2  && !/\d/.test(thisWord) ) {
 							
-							//thisWord = thisWord.replace(/[^\w\s]|_/g, "");
+							var ignoredWords = ['are', 'about', 'and', 'but', 'for', 'have', 'how', 'just',
+							'like', 'not', 'that', 'the', 'their', 'there', 'this', 'was', 'who',
+							'what', 'where', 'were', 'with', 'you', 'your'];
 
-							allWords.push(thisWord.toLowerCase() )
+							if (ignoredWords.indexOf(thisWord) === -1) {
+								allWords.push(thisWord.toLowerCase() )	
+							}
+
 						}
 				}
 			};
